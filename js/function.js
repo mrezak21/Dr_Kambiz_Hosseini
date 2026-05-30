@@ -2,7 +2,8 @@
     "use strict";
 	
 	var $window = $(window); 
-	var $body = $('body'); 
+	var $body = $('body');
+	var isRTL = document.documentElement.getAttribute('dir') === 'rtl'; 
 
 	/* Preloader Effect */
 	$window.on('load', function(){
@@ -127,26 +128,38 @@
         let revealContainers = document.querySelectorAll(".reveal");
         revealContainers.forEach((container) => {
             let image = container.querySelector("img");
+			if (!image) {
+				return;
+			}
+
+			gsap.set(image, {
+				transformOrigin: isRTL ? "right center" : "left center",
+			});
+
             let tl = gsap.timeline({
                 scrollTrigger: {
                     trigger: container,
+					start: "top 85%",
                     toggleActions: "play none none none"
                 }
             });
             tl.set(container, {
                 autoAlpha: 1
             });
-            tl.from(container, 1, {
-                xPercent: -100,
-                ease: Power2.out
+            tl.from(container, {
+				duration: 1,
+                xPercent: isRTL ? 100 : -100,
+                ease: "power2.out"
             });
-            tl.from(image, 1, {
-                xPercent: 100,
+            tl.from(image, {
+				duration: 1,
+                xPercent: isRTL ? -100 : 100,
                 scale: 1,
-                delay: -1,
-                ease: Power2.out
-            });
+                ease: "power2.out"
+            }, "-=1");
         });
+
+		ScrollTrigger.refresh();
     }
 
 	/* Text Effect Animation */
@@ -154,6 +167,7 @@
 		let staggerAmount 	= 0.05,
 			translateXValue = 0,
 			delayValue 		= 0.5,
+			textXFrom		= isRTL ? -20 : 20,
 		   animatedTextElements = document.querySelectorAll('.text-anime-style-1');
 		
 		animatedTextElements.forEach((element) => {
@@ -161,7 +175,7 @@
 				gsap.from(animationSplitText.words, {
 				duration: 1,
 				delay: delayValue,
-				x: 20,
+				x: textXFrom,
 				autoAlpha: 0,
 				stagger: staggerAmount,
 				scrollTrigger: { trigger: element, start: "top 85%" },
@@ -171,19 +185,21 @@
 	
 	if ($('.text-anime-style-2').length) {				
 		let	 staggerAmount 		= 0.03,
-			 translateXValue	= 20,
+			 translateXValue	= isRTL ? -20 : 20,
 			 delayValue 		= 0.1,
 			 easeType 			= "power2.out",
 			 animatedTextElements = document.querySelectorAll('.text-anime-style-2');
 		
 		animatedTextElements.forEach((element) => {
-			let animationSplitText = new SplitText(element, { type: "chars, words" });
-				gsap.from(animationSplitText.chars, {
+			// In RTL (Persian) split by words to keep cursive letters joined.
+			let animationSplitText = new SplitText(element, { type: isRTL ? "words" : "chars, words" });
+			let animationTargets = isRTL ? animationSplitText.words : animationSplitText.chars;
+				gsap.from(animationTargets, {
 					duration: 1,
 					delay: delayValue,
 					x: translateXValue,
 					autoAlpha: 0,
-					stagger: staggerAmount,
+					stagger: isRTL ? 0.12 : staggerAmount,
 					ease: easeType,
 					scrollTrigger: { trigger: element, start: "top 85%"},
 				});
@@ -200,18 +216,21 @@
 				element.split.revert();
 			}
 
+			// In RTL (Persian) split by words to keep cursive letters joined.
 			element.split = new SplitText(element, {
-				type: "lines,words,chars",
+				type: isRTL ? "lines,words" : "lines,words,chars",
 				linesClass: "split-line",
 			});
 			gsap.set(element, { perspective: 400 });
 
-			gsap.set(element.split.chars, {
+			let animationTargets = isRTL ? element.split.words : element.split.chars;
+
+			gsap.set(animationTargets, {
 				opacity: 0,
-				x: "50",
+				x: isRTL ? "-50" : "50",
 			});
 
-			element.animation = gsap.to(element.split.chars, {
+			element.animation = gsap.to(animationTargets, {
 				scrollTrigger: { trigger: element,	start: "top 90%" },
 				x: "0",
 				y: "0",
@@ -219,7 +238,7 @@
 				opacity: 1,
 				duration: 1,
 				ease: Back.easeOut,
-				stagger: 0.02,
+				stagger: isRTL ? 0.12 : 0.02,
 			});
 		});		
 	}
