@@ -605,6 +605,7 @@ header.main-header .header-sticky.active{
 .navbar-brand{
 	padding: 0;
 	margin: 0;
+	max-width: 200px;
 }
 
 .main-menu .nav-menu-wrapper{
@@ -848,7 +849,7 @@ header.main-header .header-sticky.active{
 .hero{
 	position: relative;
 	padding: 155px 0 0;	
-    margin-top: 50px;
+    margin-top: 20px;
 }
 
 .hero::after{
@@ -1949,6 +1950,15 @@ header.main-header .header-sticky.active{
 	overflow: hidden;
 }
 
+.program-image .play_icon{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 48px;
+	z-index: 2;
+}
+
 .program-image::before{
 	content: '';
 	position: absolute;
@@ -2038,7 +2048,8 @@ header.main-header .header-sticky.active{
 .program-content h3{
 	font-size: 20px;
 	color: var(--white-color);
-	min-height: 68px;
+	line-height: 32px;
+	min-height: 60px;
 }
 
 .program-content h3 a{
@@ -2123,7 +2134,7 @@ header.main-header .header-sticky.active{
 	position: absolute;
 	top: 50%;
 	transform: translateY(-50%);
-	left: -15px;
+	right: -15px;
 	height: 30px;
 	width: 30px;
 	background-color: var(--accent-color);
