@@ -1970,10 +1970,14 @@ header.main-header .header-sticky.active{
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	width: 48px;
+	height: 48px;
 	z-index: 2;
 }
-
+.program-image .play_icon img{
+	object-fit: contain;
+	height: 100%;
+	width: 100%;
+}
 .program-image::before{
 	content: '';
 	position: absolute;
