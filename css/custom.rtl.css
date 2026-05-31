@@ -1665,6 +1665,7 @@ header.main-header .header-sticky.active{
 
 .why-choose-us{
 	padding: 100px 0 0;
+	padding-bottom: 120px;
 }
 
 .why-choose-item{
@@ -1690,6 +1691,11 @@ header.main-header .header-sticky.active{
 	border-radius: 50%;
 	margin-bottom: 30px;
 	transition: all 0.5s ease-in-out;
+}
+.why-choose-item .icon-box i{
+	font-size: 26px;
+	color: var(--white-color);
+	display: inline-block;
 }
 
 .why-choose-item:hover .icon-box{
@@ -6955,4 +6961,11 @@ header.main-header .header-sticky.active{
 	display: flex;
 	align-items: center;
 	justify-content: center;
+}
+.hero-experience-box__aboutus{
+	max-width: 150px;
+}
+.hero-experience-box .aboutus__mini_title{
+	width: 100%;
+	font-weight: bold;
 }
