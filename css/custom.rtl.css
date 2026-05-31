@@ -502,11 +502,16 @@ body{
 .section-title{
 	margin-bottom: 40px;
 }
-.section-title small{
+.section-title small {
 	line-height: 28px ;
 	margin-top: 12px;
 }
-
+.contact__us__description{
+	display: block;
+	line-height: 32px ;
+	margin: 16px 0;
+	text-align: justify;
+}
 .section-title h3{
     position: relative;
 	font-size: 16px;
@@ -4055,6 +4060,7 @@ header.main-header .header-sticky.active{
 
 .post-entry p{
 	margin-bottom: 20px;
+	line-height: 32px;
 }
 
 .post-entry p:last-child{
@@ -4109,7 +4115,7 @@ header.main-header .header-sticky.active{
 .post-entry blockquote{
 	background: url('../images/icon-blockquote.svg'), var(--accent-secondary-color);
 	background-repeat: no-repeat;
-	background-position: 30px 30px;
+	background-position: 98% 30px;
     background-size: 50px;
 	border-radius: 20px;
     padding: 30px 90px 30px 30px;
